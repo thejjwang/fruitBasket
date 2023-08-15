@@ -1,9 +1,10 @@
 const fruitBasketContainer = document.getElementById('fruitBasketContainer');
 const fruitBasketItem = document.getElementById('fruitBasketItem');
-const input = document.getElementById('input');
 const btn = document.getElementById('btn');
+const fruitInput = document.getElementById('fruitInput');
+const imageInput = document.getElementById('imageInput');
 
-const fruitBasket = [
+let fruitBasket = [
     {
         name: 'apple',
         image: 'https://www.applesfromny.com/wp-content/uploads/2020/05/20Ounce_NYAS-Apples2.png',
@@ -16,19 +17,48 @@ const fruitBasket = [
     }
 ];
 
-const arr = [];
+const clearInputs = () => {
+    fruitInput.value = '';
+    imageInput.value = '';
+}
+
+const addFruit = () => {
+    const newFruit = {
+        name: fruitInput.value,
+        image: imageInput.value,
+        id: fruitBasket.length
+    };
+    fruitBasket.push(newFruit);
+    renderFruitBasket();
+    clearInputs();
+}
+
+const deleteFruitFromBasket = (id) => {
+    fruitBasket = fruitBasket.filter(item => item.id !== id);
+    renderFruitBasket();
+}
 
 const renderFruitBasket = () => {
+    fruitBasketContainer.innerHTML = '';
     fruitBasket.forEach(item => {
+       
         fruitBasketContainer.innerHTML += 
-        `<div>
+        `<div class="itemContainer">
             <li>${item.name}</li>
             <img src=${item.image}></img>
+            <button class="deleteBtn" id=${item.id}>Delete</button>
         </div>`
-
+        const deleteBtns = document.querySelectorAll('.deleteBtn');
+        deleteBtns.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = parseInt(button.getAttribute('id'));
+                deleteFruitFromBasket(id);
+            })
+        })
     })
 }
 
-btn.addEventListener('click', renderFruitBasket);
-
+btn.addEventListener('click', addFruit);
 renderFruitBasket();
+
+
