@@ -29,11 +29,14 @@ const addFruit = () => {
         id: fruitBasket.length
     };
     fruitBasket.push(newFruit);
+    // render fruit to the display area
     renderFruitBasket();
+    // clear the input fields when btn is clicked
     clearInputs();
 }
 
 const deleteFruitFromBasket = (id) => {
+    // filter out fruitBasket array if the id does not match with the ids in the array 
     fruitBasket = fruitBasket.filter(item => item.id !== id);
     renderFruitBasket();
 }
@@ -51,6 +54,7 @@ const renderFruitBasket = () => {
         const deleteBtns = document.querySelectorAll('.deleteBtn');
         deleteBtns.forEach(button => {
             button.addEventListener('click', () => {
+                //setting id to the atribute on the btn named id
                 const id = parseInt(button.getAttribute('id'));
                 deleteFruitFromBasket(id);
             })
