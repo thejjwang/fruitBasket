@@ -4,49 +4,19 @@ const btn = document.getElementById('btn');
 const fruitInput = document.getElementById('fruitInput');
 const imageInput = document.getElementById('imageInput');
 
-let fruitBasket = [
-    {
-        name: 'apple',
-        image: 'https://www.applesfromny.com/wp-content/uploads/2020/05/20Ounce_NYAS-Apples2.png',
-        id: 0
-    },
-    {
-        name: 'banana',
-        image: 'https://th-thumbnailer.cdn-si-edu.com/4Nq8HbTKgX6djk07DqHqRsRuFq0=/1000x750/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/d5/24/d5243019-e0fc-4b3c-8cdb-48e22f38bff2/istock-183380744.jpg',
-        id: 1
+let fruitBasket = [];
+
+const renderFruitBasket = async () => {
+    try {
+        let response = await fetch("http://localhost:3000/items");
+        let data = await response.json();
+        fruitBasket = data;
+        console.log(fruitBasket);
     }
-];
-
-const clearInputs = () => {
-    fruitInput.value = '';
-    imageInput.value = '';
-}
-
-const addFruit = () => {
-    const newFruit = {
-        name: fruitInput.value,
-        image: imageInput.value,
-        id: fruitBasket.length
-    };
-    fruitBasket.push(newFruit);
-    // render fruit to the display area
-    renderFruitBasket();
-    // clear the input fields when btn is clicked
-    clearInputs();
-}
-
-// function intaking fruit id
-const deleteFruitFromBasket = (id) => {
-    // filter out fruitBasket array if the id does not match with the ids in the array 
-    for (let i = 0; i <= fruitBasket.length-1; i++) {
-        fruitBasket[i].id === id ? fruitBasket.splice(i, 1) : renderFruitBasket();
+    catch (err) {
+        console.log(err);
     }
-    // show the updated fruits (newly deleted fruit is gone now)
-    renderFruitBasket();
-}
 
-
-const renderFruitBasket = () => {
     // clear ul before rendering
     fruitBasketContainer.innerHTML = '';
     // for each item in fruitBasket array add a div with the fruit info
@@ -66,6 +36,52 @@ const renderFruitBasket = () => {
             })
         })
     })
+}
+
+const clearInputs = () => {
+    fruitInput.value = '';
+    imageInput.value = '';
+}
+
+const addFruit = async () => {
+    const newFruit = {
+        name: fruitInput.value,
+        image: imageInput.value,
+        id: Date.now()
+    };
+    try {
+        await fetch("http://localhost:3000/items/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(newFruit)
+            });
+
+    } catch {
+        console.log(error)
+    }
+    // render fruit to the display area
+    renderFruitBasket();
+    // clear the input fields when btn is clicked
+    clearInputs();
+}
+
+// function intaking fruit id
+const deleteFruitFromBasket = async (id) => {
+    // filter out fruitBasket array if the id does not match with the ids in the array 
+        try {
+            await fetch(`http://localhost:3000/items/${id}`, {
+                method: "DELETE",
+            })
+        } catch {
+            console.log(error)
+        }
+
+    // for (let i = 0; i < fruitBasket.length; i++) {
+    //     fruitBasket[i].id === id && fruitBasket.splice(i, 1);
+    // }
+    // show the updated fruits (newly deleted fruit is gone now)
 }
 
 // when btn is clicked call addFruit()
