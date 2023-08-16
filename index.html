@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="output.css" rel="stylesheet"></link>
+    <link href="styles.css" rel="stylesheet"></link>
 </head>
 <body>
-    <h3 class="text-4xl font-extrabold text-center bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">Fruit Basket Display:</h3>
-    <div class="flex items-center">
-        <input placeholder="enter fruit" id="fruitInput" type="text"></input>
-        <input placeholder="enter image" id="imageInput" type="text"></input>
-        <button type="button" id="btn">Add</button>
+    <div id="headingContainer">
+        <h1 id="heading">Fruit Basket Display:</h3>
+    </div>
+    <div id="divContainer">
+        <input placeholder="enter fruit" id="fruitInput" class="input" type="text"></input>
+        <input placeholder="enter image url" id="imageInput" class="input" type="text"></input>
+        <button type="button" id="addBtn">Add</button>
     </div>
     <div>
         <ul id="fruitBasketContainer">

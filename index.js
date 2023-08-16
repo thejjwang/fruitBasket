@@ -1,6 +1,6 @@
 const fruitBasketContainer = document.getElementById('fruitBasketContainer');
 const fruitBasketItem = document.getElementById('fruitBasketItem');
-const btn = document.getElementById('btn');
+const btn = document.getElementById('addBtn');
 const fruitInput = document.getElementById('fruitInput');
 const imageInput = document.getElementById('imageInput');
 
