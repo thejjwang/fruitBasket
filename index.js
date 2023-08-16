@@ -35,16 +35,22 @@ const addFruit = () => {
     clearInputs();
 }
 
+// function intaking fruit id
 const deleteFruitFromBasket = (id) => {
     // filter out fruitBasket array if the id does not match with the ids in the array 
-    fruitBasket = fruitBasket.filter(item => item.id !== id);
+    for (let i = 0; i <= fruitBasket.length-1; i++) {
+        fruitBasket[i].id === id ? fruitBasket.splice(i, 1) : renderFruitBasket();
+    }
+    // show the updated fruits (newly deleted fruit is gone now)
     renderFruitBasket();
 }
 
+
 const renderFruitBasket = () => {
+    // clear ul before rendering
     fruitBasketContainer.innerHTML = '';
+    // for each item in fruitBasket array add a div with the fruit info
     fruitBasket.forEach(item => {
-       
         fruitBasketContainer.innerHTML += 
         `<div class="itemContainer">
             <li>${item.name}</li>
@@ -62,6 +68,7 @@ const renderFruitBasket = () => {
     })
 }
 
+// when btn is clicked call addFruit()
 btn.addEventListener('click', addFruit);
 renderFruitBasket();
 

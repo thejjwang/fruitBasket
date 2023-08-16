@@ -578,8 +578,8 @@ video {
   resize: both;
 }
 
-.flex-row {
-  flex-direction: row;
+.items-center {
+  align-items: center;
 }
 
 .border {

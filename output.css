@@ -1,6 +1,6 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /*
 ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
 */
@@ -220,6 +220,7 @@ textarea {
   padding: 0;
   /* 3 */
 }
+
 /*
 Remove the inheritance of text transform in Edge and Firefox.
 */
